@@ -29,7 +29,7 @@ public class MatchLibrary {
 	}
 
 	public List<Match> getSummary() {
-		Collections.sort(matches, new MatchComparator());
+		Collections.sort(matches, new MatchScoreComparator());
 		return new ArrayList<>(matches);
 	}
 
