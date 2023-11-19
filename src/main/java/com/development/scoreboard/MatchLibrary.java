@@ -26,7 +26,7 @@ public class MatchLibrary {
     public List<Match> getSummary() {
         // List<Match> matchList = new ArrayList<>(matches);
         Collections.sort(matches, new MatchComparator());
-        return matches;
+        return new ArrayList<>(matches);
     }
 
 }
