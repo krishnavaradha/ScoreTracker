@@ -3,29 +3,34 @@ package com.development.scoreboard;
 import java.util.*;
 
 public class MatchLibrary {
-    private List<Match> matches;
-    public MatchLibrary(){
-        this.matches = new ArrayList<>();
-    }
+	private List<Match> matches;
 
-    public Match createMatch(String homeTeam, String awayTeam) {
-        Match match = new Match(homeTeam, awayTeam);
-        matches.add(match);
-        return match;
-    }
+	public MatchLibrary() {
+		this.matches = new ArrayList<>();
+	}
 
-    public void updateScore(Match match, int homeScore, int awayScore) {
-        match.setHomeScore(homeScore);
-        match.setAwayScore(awayScore);
-    }
+	public Match createMatch(String homeTeam, String awayTeam) {
+		Match match = new Match(homeTeam, awayTeam);
+		matches.add(match);
+		return match;
+	}
 
-    public void finishGame(Match match) {
-        matches.remove(match);
-    }
+	public void updateScore(Match match, int homeScore, int awayScore) {
+		match.setHomeScore(homeScore);
+		match.setAwayScore(awayScore);
+	}
 
-    public List<Match> getSummary() {
-        Collections.sort(matches, new MatchComparator());
-        return new ArrayList<>(matches);
-    }
+	public void finishGame(Match match) {
+		if (matches.contains(match)) {
+			matches.remove(match);
+		} else {
+			throw new IllegalArgumentException("Match not found in the Match library.");
+		}
+	}
+
+	public List<Match> getSummary() {
+		Collections.sort(matches, new MatchComparator());
+		return new ArrayList<>(matches);
+	}
 
 }

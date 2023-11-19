@@ -60,6 +60,22 @@ public class AppTest
         matchLibrary.finishGame(match);
         assertFalse(matchLibrary.getSummary().contains(match));
     }
+    @Test
+    public void testMatchNotFoundFinishGame() {
+        String homeTeam = "Home Team";
+        String awayTeam = "Away Team";
+        int homeScore = 2;
+        int awayScore = 1;
+        Match match = matchLibrary.createMatch(homeTeam, awayTeam);
+        matchLibrary.updateScore(match, homeScore, awayScore);
+
+        try {
+            matchLibrary.finishGame(new Match("India", "Australia"));
+            fail("Expected IllegalArgumentException, but no exception was thrown");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Match not found in the Match library.", e.getMessage());
+        }
+    }
 
     public Match createMatch(String homeTeam, String awayTeam, int homeScore, int awayScore) {
         Match match = new Match(homeTeam, awayTeam);
